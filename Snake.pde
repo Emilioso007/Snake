@@ -1,4 +1,4 @@
-//main
+//wallWrap
 
 //globale variabler 
 
@@ -15,6 +15,8 @@ PVector dir;
 //slange mad
 PVector food;
 
+int segmentSize;
+
 void setup(){
   size(190, 190);
   
@@ -25,14 +27,16 @@ void setup(){
   
   snakeSize = 2;
   
+  segmentSize = 10;
+  
   //vi tilføjer den første del af vores slange
   longSnake = new ArrayList<PVector>();
-  longSnake.add(new PVector(9*10, 9*10));
+  longSnake.add(new PVector(9*segmentSize, 9*segmentSize));
   
   //vi finder et tilfældig sted at ligge noget
   //mad til vores slange
-  food = new PVector((int)random(0,18)*10, 
-    (int)random(0,18)*10);
+  food = new PVector((int)random(0,18)*segmentSize, 
+    (int)random(0,18)*segmentSize);
     
   dir = new PVector(0, 0);
 }
@@ -40,19 +44,35 @@ void setup(){
 void draw(){
   background(0);
   
+
+  
   //tegner maden
-  rect(food.x, food.y, 10, 10);
+  rect(food.x, food.y, segmentSize, segmentSize);
   
   //har tilføjer vi et extra segment af vores slange,
   //i den retning vi bevæger os i
   longSnake.add(new PVector(
-    longSnake.get(longSnake.size()-1).x + dir.x*10, 
-    longSnake.get(longSnake.size()-1).y + dir.y*10));
-  
+    longSnake.get(longSnake.size()-1).x + dir.x*segmentSize, 
+    longSnake.get(longSnake.size()-1).y + dir.y*segmentSize));
+
+  //wallWrap
+  if(longSnake.get(longSnake.size()-1).x >= width){
+    longSnake.get(longSnake.size()-1).x = 0;
+  }
+  if(longSnake.get(longSnake.size()-1).x < 0){
+    longSnake.get(longSnake.size()-1).x = width-segmentSize;
+  }
+  if(longSnake.get(longSnake.size()-1).y >= height){
+    longSnake.get(longSnake.size()-1).y = 0;
+  }
+  if(longSnake.get(longSnake.size()-1).y < 0){
+    longSnake.get(longSnake.size()-1).y = height-segmentSize;
+  }
+
   //går igennem vært segment af vores slange
   //og tegner den.
   for(int i = longSnake.size()-1; i >= 0; i--){
-    rect(longSnake.get(i).x, longSnake.get(i).y,10,10);
+    rect(longSnake.get(i).x, longSnake.get(i).y,segmentSize,segmentSize);
     
     //kollision detection for vores slange,
     //her tjekker vi om hovedt at vores slange
@@ -65,7 +85,7 @@ void draw(){
       //og sætter den tilbage til sin start 
       //position
       longSnake = new ArrayList<PVector>();
-      longSnake.add(new PVector(9*10, 9*10));
+      longSnake.add(new PVector(9*segmentSize, 9*segmentSize));
       snakeSize = 2;
       //break kan vi bruge til at breake ud af
       //vores for-loop, uden at gøre det færdigt
@@ -81,8 +101,8 @@ void draw(){
         food.y == longSnake.get(longSnake.size()-1).y){
     
     //vi flytter vores med et nyt sted
-    food = new PVector((int)random(0,18)*10, 
-    (int)random(0,18)*10);
+    food = new PVector((int)random(0,18)*segmentSize, 
+    (int)random(0,18)*segmentSize);
     
     snakeSize++;
   }
@@ -94,6 +114,7 @@ void draw(){
   if (longSnake.size() >= snakeSize){
     longSnake.remove(0);
   }
+  
 }
 
 
