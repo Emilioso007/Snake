@@ -1,3 +1,5 @@
+//main
+
 //globale variabler 
 
 //liste over alle punkter vores slange optager
