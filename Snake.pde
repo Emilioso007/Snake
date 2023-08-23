@@ -115,29 +115,6 @@ void draw() {
   }
 }
 
-
-//læser keyboarded, og sætter retningen for
-//vores slange
-void keyPressed() {
-  if (key == CODED) {
-    //"dir.y != 1" vi forhinder slangen i at
-    //gå bæglens
-    if (keyCode == UP && dir.y != 1) {
-      dir.y = -1;
-      dir.x = 0;
-    } else if (keyCode == DOWN && dir.y != -1) {
-      dir.y = 1;
-      dir.x = 0;
-    } else if (keyCode == LEFT && dir.x != 1) {
-      dir.x = -1;
-      dir.y = 0;
-    } else if (keyCode == RIGHT && dir.x != -1) {
-      dir.x = 1;
-      dir.y = 0;
-    }
-  }
-}
-
 //ideer til udfordringer:
 //1. hæv hastigheden vær gang slangen finder mad
 //2. styr slangen med musen
