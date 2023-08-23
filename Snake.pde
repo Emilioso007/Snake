@@ -21,7 +21,7 @@ void setup() {
   //Da vores logik er bundet til frameraten, kan vi
   //forøge hastigheden ved at hæve vores framerate.
   //prøv det
-  frameRate(4);
+  frameRate(8);
 
   snakeSize = 2;
 
