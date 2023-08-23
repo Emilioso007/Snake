@@ -1,4 +1,4 @@
-//mouseControl
+//aiSnake
 
 //globale variabler
 
@@ -40,10 +40,10 @@ void setup() {
 void draw() {
   background(0);
 
-  //mouseControl
-  if (abs(mouseX - longSnake.get(longSnake.size()-1).x) >
-    abs(mouseY - longSnake.get(longSnake.size()-1).y)) {
-    if (mouseX >= longSnake.get(longSnake.size()-1).x) {
+  //aiSnake
+  if (abs(food.x - longSnake.get(longSnake.size()-1).x) >
+    abs(food.y - longSnake.get(longSnake.size()-1).y)) {
+    if (food.x >= longSnake.get(longSnake.size()-1).x) {
       dir.x = 1;
       dir.y = 0;
     } else {
@@ -51,7 +51,7 @@ void draw() {
       dir.y = 0;
     }
   } else {
-    if (mouseY >= longSnake.get(longSnake.size()-1).y) {
+    if (food.y >= longSnake.get(longSnake.size()-1).y) {
       dir.x = 0;
       dir.y = 1;
     } else {
@@ -112,29 +112,6 @@ void draw() {
   //den bevægersig
   if (longSnake.size() >= snakeSize) {
     longSnake.remove(0);
-  }
-}
-
-
-//læser keyboarded, og sætter retningen for
-//vores slange
-void keyPressed() {
-  if (key == CODED) {
-    //"dir.y != 1" vi forhinder slangen i at
-    //gå bæglens
-    if (keyCode == UP && dir.y != 1) {
-      dir.y = -1;
-      dir.x = 0;
-    } else if (keyCode == DOWN && dir.y != -1) {
-      dir.y = 1;
-      dir.x = 0;
-    } else if (keyCode == LEFT && dir.x != 1) {
-      dir.x = -1;
-      dir.y = 0;
-    } else if (keyCode == RIGHT && dir.x != -1) {
-      dir.x = 1;
-      dir.y = 0;
-    }
   }
 }
 
