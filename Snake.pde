@@ -80,18 +80,9 @@ void draw() {
     food.y == longSnake.get(longSnake.size()-1).y) {
 
     //vi flytter vores med et nyt sted
-    boolean foodOk = true;
-    do {
-      food = new PVector((int)random(0, 18)*10,
-        (int)random(0, 18)*10);
-        println(second());
-      for (int i = 0; i > longSnake.size(); i++) {
-        if (longSnake.get(i).x == food.x && longSnake.get(i).y == food.y) {
-          foodOk = false;
-          break;
-        }
-      }
-    } while (!foodOk);
+
+    newFood(longSnake);
+
     snakeSize++;
   }
 
@@ -127,12 +118,21 @@ void keyPressed() {
   }
 }
 
-//ideer til udfordringer:
-//1. hæv hastigheden vær gang slangen finder mad
-//2. styr slangen med musen
-//3. hvis slangen rammer kanten af vinduet
-//    reset spillet
-//4. SVÆR! forhindre maden af spawne et sted hvor slangen
-//    allerede er
-//5 SVÆR! hvis slangen rammer kanten af vinduet
-//    skal den dukke op fra den anden side
+void newFood(ArrayList<PVector> snakeIn) {
+  food = new PVector((int)random(0, 18)*10, (int)random(0, 18)*10);
+  for (int i = 0; i < snakeIn.size(); i++) {
+    if (food.equals(snakeIn.get(i))) {
+      println(second());
+      newFood(snakeIn);
+    }
+  }
+}
+  //ideer til udfordringer:
+  //1. hæv hastigheden vær gang slangen finder mad
+  //2. styr slangen med musen
+  //3. hvis slangen rammer kanten af vinduet
+  //    reset spillet
+  //4. SVÆR! forhindre maden af spawne et sted hvor slangen
+  //    allerede er
+  //5 SVÆR! hvis slangen rammer kanten af vinduet
+  //    skal den dukke op fra den anden side
