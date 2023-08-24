@@ -21,7 +21,7 @@ void setup() {
   //Da vores logik er bundet til frameraten, kan vi
   //forøge hastigheden ved at hæve vores framerate.
   //prøv det
-  frameRate(30);
+  frameRate(20);
 
   snakeSize = 2;
 
@@ -36,7 +36,7 @@ void setup() {
 
   dir = new PVector(0, 0);
   
-  fill(255,64);
+  fill(255);
   
 }
 
@@ -82,7 +82,7 @@ void draw() {
     //rammer sig selv
     if (longSnake.get(longSnake.size()-1).x == longSnake.get(i).x &&
       longSnake.get(longSnake.size()-1).y == longSnake.get(i).y &&
-      i < longSnake.size()-1 && false) {
+      i < longSnake.size()-1) {
 
       //vi fjerner alle dele af vores slange,
       //og sætter den tilbage til sin start
